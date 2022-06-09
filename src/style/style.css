@@ -1,3 +1,5 @@
+/* General styling */
+
 * {
     box-sizing: border-box;
 }
@@ -6,6 +8,8 @@
     position: relative;
     display: inline-block;
 }
+
+/* UI styling */
 
 header {
     position: absolute;
@@ -50,4 +54,23 @@ header {
     width: 100px;
     height: 100px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Game Over overlay styling */
+
+#gameOver {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    font-size: 100px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
