@@ -14,6 +14,7 @@ class Sprite {
         this.velocity = velocity;
         this.height = 150;
         this.width = 50;
+        this.health = 100;
         this.lastKey
         this.grounded = false;
         this.attackBox = {
@@ -164,7 +165,8 @@ function animate() {
         player.isAttacking
         ) {
         player.isAttacking = false;
-        console.log('player attack');
+        enemy.health -= 20;
+        document.querySelector('#enemyHealth').style.width = `${enemy.health}%`;
     }
 
     if (
@@ -172,7 +174,8 @@ function animate() {
         enemy.isAttacking
         ) {
         enemy.isAttacking = false;
-        console.log('enemy attack');
+        player.health -= 20;
+        document.querySelector('#playerHealth').style.width = `${player.health}%`;
     }
 }
 
