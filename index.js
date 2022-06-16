@@ -6,7 +6,7 @@ canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-const GRAVITY = 0.7;
+const GRAVITY = 0.3;
 
 let timer = 60;
 let timerId;
@@ -80,7 +80,34 @@ const enemy = new Fighter({
     lastKey: '',
     colour: 'blue',
     imageSrc: './assets/kenji/Idle.png',
-    framesMax: 4
+    framesMax: 4,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 167
+    },
+    sprites: {
+        idle: {
+            imageSrc: './assets/kenji/Idle.png',
+            framesMax: 4
+        },
+        run: {
+            imageSrc: './assets/kenji/Run.png',
+            framesMax: 8
+        },
+        jump: {
+            imageSrc: './assets/kenji/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: './assets/kenji/Fall.png',
+            framesMax: 2
+        },
+        attack1: {
+            imageSrc: './assets/kenji/Attack1.png',
+            framesMax: 4
+        },
+    }
 });
 
 const keys = {
@@ -142,8 +169,18 @@ function animate() {
     // Enemy movement
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -1;
+        enemy.switchSprite('run');
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 1;
+        enemy.switchSprite('run');
+    } else {
+        enemy.switchSprite('idle');
+    }
+
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump');
+    } else if (enemy.velocity.y > 0) {
+        enemy.switchSprite('fall');
     }
 
     // Detect collisions
@@ -185,7 +222,7 @@ window.addEventListener('keydown', e => {
             player.lastKey = 'a';
             break;
         case 'w':
-            if (player.grounded) player.velocity.y = -20;
+            if (player.grounded) player.velocity.y = -10;
             break;
         case ' ':
             player.attack();
@@ -201,7 +238,7 @@ window.addEventListener('keydown', e => {
             enemy.lastKey = 'ArrowLeft';
             break;
         case 'ArrowUp':
-            if (enemy.grounded) enemy.velocity.y = -20;
+            if (enemy.grounded) enemy.velocity.y = -10;
             break;
         case 'ArrowDown':
             enemy.attack();
