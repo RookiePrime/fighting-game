@@ -6,7 +6,7 @@ canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-const GRAVITY = 0.3;
+const GRAVITY = 0.2;
 
 let timer = 60;
 let timerId;
@@ -83,8 +83,8 @@ const player = new Fighter({
 
 const enemy = new Fighter({
     position: {
-        x: 400,
-        y: 100
+        x: 970,
+        y: -300
     },
     velocity: {
         x: 0,
