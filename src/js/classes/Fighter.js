@@ -8,7 +8,8 @@ class Fighter extends Sprite {
         framesMax = 1,
         offset = { x: 0, y: 0 },
         sprites,
-        attackBox = { offset: { }, width: undefined, height: undefined }
+        attackBox = { offset: { }, width: undefined, height: undefined },
+        damage = 20
     }) {
         super({
             position,
@@ -32,6 +33,7 @@ class Fighter extends Sprite {
             width: attackBox.width,
             height: attackBox.height
         }
+        this.damage = damage;
         this.colour = colour;
         this.health = 100;
         this.isAttacking = false;
@@ -75,8 +77,8 @@ class Fighter extends Sprite {
         this.isAttacking = true;
     }
 
-    takeHit() {
-        this.health -= 20;
+    takeHit(damage) {
+        this.health -= damage;
 
         if (this.health <= 0) {
             this.switchSprite('death');

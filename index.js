@@ -77,7 +77,8 @@ const player = new Fighter({
         },
         width: 147,
         height: 50
-    }
+    },
+    damage: 30
 });
 
 const enemy = new Fighter({
@@ -139,7 +140,8 @@ const enemy = new Fighter({
         },
         width: 180,
         height: 50
-    }
+    },
+    damage: 15
 });
 
 const keys = {
@@ -174,6 +176,8 @@ function animate() {
 
     background.update();
     shop.update();
+    c.fillStyle = 'rgba(255, 255, 255, 0.15)';
+    c.fillRect(0, 0, canvas.width, canvas.height);
     player.update();
     enemy.update();
 
@@ -220,9 +224,11 @@ function animate() {
         rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&
         player.isAttacking && player.framesCurrent === 4
         ) {
-        enemy.takeHit();
+        enemy.takeHit(player.damage);
         player.isAttacking = false;
-        document.querySelector('#enemyHealth').style.width = `${enemy.health}%`;
+        gsap.to('#enemyHealth', {
+            width: `${enemy.health}%`
+        });
     }
 
     if (player.isAttacking && player.framesCurrent === 4) player.isAttacking = false;
@@ -233,9 +239,11 @@ function animate() {
         rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&
         enemy.isAttacking && enemy.framesCurrent === 2
         ) {
-        player.takeHit();
+        player.takeHit(enemy.damage);
         enemy.isAttacking = false;
-        document.querySelector('#playerHealth').style.width = `${player.health}%`;
+        gsap.to('#playerHealth', {
+            width: `${player.health}%`
+        });
     }
 
     if (enemy.isAttacking && enemy.framesCurrent === 2) enemy.isAttacking = false;
