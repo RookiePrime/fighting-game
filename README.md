@@ -1,6 +1,6 @@
 # FIGHTING GAME [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
-A fighting game run entirely within browser, on HTML, CSS and JavaScript.
+A fighting game run entirely within browser, on HTML, CSS and JavaScript. [You can play it by clicking here!](https://rookieprime.github.io/fighting-game/)
 
 ![Preview image of the application](./preview.png)
 
